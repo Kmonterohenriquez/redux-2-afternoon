@@ -13,7 +13,7 @@ export const requestUserData = () => {
 	let data = axios
 		.get('/auth/user-data')
 		.then(res => res.data)
-        .catch(err => err.message);
+        // .catch(err => err.message);
         
 	return {
 		type: REQUEST_USER_DATA,
@@ -26,10 +26,10 @@ export default function userReducer(state = initialState, action) {
 
 	switch (type) {
 		case REQUEST_USER_DATA + '_FULFILLED':
-			// const { email, firstName, lastName } = payload.user;
-            return { ...state };
-        case REQUEST_USER_DATA + '_REJECTED':
-                return {...state, errorMessage: payload};
+			const { email, firstName, lastName } = payload.user;
+            return { email, firstName, lastName };
+        // case REQUEST_USER_DATA + '_REJECTED':
+        //         return {...state, errorMessage: payload};
 		default:
 			return state;
 	}
